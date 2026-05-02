@@ -1,0 +1,103 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #fefefe;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.recipe-card {
+  width: 100%;
+  max-width: 600px;
+  background: #fff8f0;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+}
+
+.recipe-card h1 {
+  text-align: center;
+  font-size: 2em;
+}
+
+.dish-image {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.info {
+  margin: 10px 0;
+  font-size: 1rem;
+}
+
+button {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+  background: #ff8c42;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background: #e67629;
+}
+
+ul, ol {
+  padding-left: 20px;
+  transition: all 0.3s ease;
+}
+
+li {
+  margin: 8px 0;
+  transition: color 0.3s;
+}
+
+li:hover {
+  color: #d14f2f;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+.progress-bar-container {
+  height: 10px;
+  background: #ddd;
+  margin-top: 15px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 10px;
+  background: #4caf50;
+  width: 0%;
+  transition: width 0.5s ease-in-out;
+}
+
+@media screen and (max-width: 600px) {
+  .recipe-card {
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 1.5em;
+  }
+}
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+  button, .progress-bar-container {
+    display: none;
+  }
+}

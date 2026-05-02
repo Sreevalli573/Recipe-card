@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chocolate Cake Recipe</title>
+  <style>
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #fefefe;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.recipe-card {
+  width: 100%;
+  max-width: 600px;
+  background: #fff8f0;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+}
+
+.recipe-card h1 {
+  text-align: center;
+  font-size: 2em;
+}
+
+.dish-image {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.info {
+  margin: 10px 0;
+  font-size: 1rem;
+}
+
+button {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+  background: #ff8c42;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background: #e67629;
+}
+
+ul, ol {
+  padding-left: 20px;
+  transition: all 0.3s ease;
+}
+
+li {
+  margin: 8px 0;
+  transition: color 0.3s;
+}
+
+li:hover {
+  color: #d14f2f;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+.progress-bar-container {
+  height: 10px;
+  background: #ddd;
+  margin-top: 15px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 10px;
+  background: #4caf50;
+  width: 0%;
+  transition: width 0.5s ease-in-out;
+}
+
+@media screen and (max-width: 600px) {
+  .recipe-card {
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 1.5em;
+  }
+}
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+  button, .progress-bar-container {
+    display: none;
+  }
+}
+
+
+  </style>
+
+</head>
+<body>
+  <div class="recipe-card">
+    <h1>Chocolate Cake</h1>
+    <img src="D:\downloads\chocolate.jpg" alt="Chocolate Cake" class="dish-image" />
+
+    <div class="info">
+      <p><strong>Preparation Time:</strong> 45 minutes</p>
+      <p><strong>Serving Size:</strong> 8 servings</p>
+    </div>
+
+    <button id="toggle-ingredients">Show Ingredients</button>
+    <ul id="ingredients" class="collapsible hidden">
+      <li>2 cups flour</li>
+      <li>1 cup sugar</li>
+      <li>1/2 cup cocoa powder</li>
+      <li>1 tsp baking powder</li>
+      <li>2 eggs</li>
+      <li>1 cup milk</li>
+    </ul>
+
+    <button id="toggle-steps">Show Steps</button>
+    <ol id="steps" class="collapsible hidden">
+      <li>Preheat the oven to 350°F (175°C).</li>
+      <li>Mix dry ingredients together.</li>
+      <li>Add eggs and milk and stir well.</li>
+      <li>Pour into a greased pan.</li>
+      <li>Bake for 30-35 minutes.</li>
+    </ol>
+
+    <button id="start-cooking">Start Cooking</button>
+    <button id="next-step" class="hidden">Next Step</button>
+    <div class="progress-bar-container">
+      <div id="progress-bar" class="progress-bar"></div>
+    </div>
+  </div>
+</body>
+<script>
+    const ingredientsBtn = document.getElementById("toggle-ingredients");
+const stepsBtn = document.getElementById("toggle-steps");
+const ingredientsList = document.getElementById("ingredients");
+const stepsList = document.getElementById("steps");
+
+ingredientsBtn.addEventListener("click", () => {
+  ingredientsList.classList.toggle("hidden");
+  ingredientsBtn.textContent = ingredientsList.classList.contains("hidden") ? "Show Ingredients" : "Hide Ingredients";
+});
+
+stepsBtn.addEventListener("click", () => {
+  stepsList.classList.toggle("hidden");
+  stepsBtn.textContent = stepsList.classList.contains("hidden") ? "Show Steps" : "Hide Steps";
+});
+
+const startBtn = document.getElementById("start-cooking");
+const nextBtn = document.getElementById("next-step");
+const steps = document.querySelectorAll("#steps li");
+const progressBar = document.getElementById("progress-bar");
+
+let currentStep = -1;
+
+startBtn.addEventListener("click", () => {
+  currentStep = 0;
+  highlightStep(currentStep);
+  nextBtn.classList.remove("hidden");
+  startBtn.disabled = true;
+  updateProgress();
+});
+
+nextBtn.addEventListener("click", () => {
+  if (currentStep < steps.length - 1) {
+    currentStep++;
+    highlightStep(currentStep);
+    updateProgress();
+  } else {
+    alert("You're done! Enjoy your cake 🎂");
+    nextBtn.disabled = true;
+  }
+});
+
+function highlightStep(index) {
+  steps.forEach((step, i) => {
+    step.style.backgroundColor = i === index ? "#fff3e0" : "transparent";
+    step.style.fontWeight = i === index ? "bold" : "normal";
+  });
+}
+
+function updateProgress() {
+  const percent = ((currentStep + 1) / steps.length) * 100;
+  progressBar.style.width = percent + "%";
+}
+
+</script>
+</html>
+
+
+
